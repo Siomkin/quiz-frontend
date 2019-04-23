@@ -1,11 +1,32 @@
 {
-  "name": "it-front",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "react-scripts": "3.0.0"
+  },
   "dependencies": {
+    "classnames": "^2.2.6",
+    "connected-react-router": "^6.4.0",
+    "history": "^4.9.0",
+    "marked": "^0.6.2",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "react-redux": "^7.0.2",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "react-router-redux": "^5.0.0-alpha.9",
+    "react-transition-group": "^2.5.0",
+    "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-form": "^8.2.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "superagent": "^5.0.2",
+    "superagent-promise": "^1.1.0",
+    "timeago.js": "^3.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
