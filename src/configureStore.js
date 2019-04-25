@@ -8,7 +8,7 @@ import {tokenMiddleware} from "./middleware";
 export const history = createBrowserHistory();
 
 export default function configureStore(preloadedState) {
-    const store = createStore(
+    return createStore(
         createRootReducer(history), // root reducer with router state
         preloadedState,
         compose(
@@ -18,7 +18,6 @@ export default function configureStore(preloadedState) {
                 tokenMiddleware,
             ),
         ),
-    );
-
-    return store
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
 }
