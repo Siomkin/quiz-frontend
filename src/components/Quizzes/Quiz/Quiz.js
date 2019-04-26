@@ -1,11 +1,12 @@
 import React from 'react';
 import timeago from 'timeago.js';
 import {Message} from "../../Common/Message";
+import {Link} from "react-router-dom";
 
 
 export class Quiz extends React.Component {
     render() {
-        const {quiz} = this.props;
+        const {quiz, isAuthenticated} = this.props;
 
         if (null === quiz) {
             return (<Message message="Quiz does not exist"/>);
@@ -22,6 +23,17 @@ export class Quiz extends React.Component {
                         </small>
                     </p>
                 </div>
+
+                {
+                    isAuthenticated &&
+                    (
+                        <div className="nav-item text-center pb-4">
+                            <Link to={`/beginQuiz/${quiz.id}`} className="btn btn-info">
+                                Start new
+                            </Link>
+                        </div>
+                    )
+                }
             </div>
         )
     }
