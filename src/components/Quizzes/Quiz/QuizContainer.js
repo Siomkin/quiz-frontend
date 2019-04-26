@@ -3,9 +3,11 @@ import {connect} from "react-redux";
 import {Quiz} from "./Quiz";
 import {Spinner} from "../../Common/Spinner";
 import {quizFetch, quizUnload} from "../../../actions/quizActions";
+import QuizPassingListContainer from "./QuizPassingListContainer";
 
 const mapeStateToProps = state => ({
-    ...state.quiz
+    ...state.quiz,
+    isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = {
@@ -23,7 +25,7 @@ class BlogPostContainer extends React.Component {
     }
 
     render() {
-        const {isFetching, quiz} = this.props;
+        const {isAuthenticated, isFetching, quiz} = this.props;
 
         if (isFetching) {
             return (<Spinner/>);
@@ -31,7 +33,8 @@ class BlogPostContainer extends React.Component {
 
         return (
             <div>
-                <Quiz quiz={quiz}/>
+                <Quiz quiz={quiz} isAuthenticated={isAuthenticated}/>
+                {isAuthenticated && quiz && <QuizPassingListContainer quizId={this.props.match.params.id}/>}
             </div>
         )
     }

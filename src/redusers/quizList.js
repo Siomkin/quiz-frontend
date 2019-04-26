@@ -4,7 +4,6 @@ import {
     QUIZ_LIST_ERROR,
     QUIZ_LIST_SET_PAGE
 } from "../actions/constants";
-import {hydraPageCount} from "../utils/apiUtils";
 
 export default (state = {
     quizzes: null,
@@ -22,8 +21,8 @@ export default (state = {
         case QUIZ_LIST_RECEIVED:
             state = {
                 ...state,
-                quizzes: action.data['hydra:member'],
-                pageCount: hydraPageCount(action.data),
+                quizzes: action.data['data'],
+                pageCount: action.data['pageCount'],
                 isFetching: false
             };
             return state;
