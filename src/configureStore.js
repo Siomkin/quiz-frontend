@@ -7,17 +7,18 @@ import {tokenMiddleware} from "./middleware";
 
 export const history = createBrowserHistory();
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 export default function configureStore(preloadedState) {
     return createStore(
         createRootReducer(history), // root reducer with router state
         preloadedState,
-        compose(
+        composeEnhancers(
             applyMiddleware(
                 thunk,
                 routerMiddleware(history), // for dispatching history actions
                 tokenMiddleware,
             ),
-        ),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        )
     )
 }

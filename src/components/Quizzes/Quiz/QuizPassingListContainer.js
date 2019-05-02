@@ -5,7 +5,7 @@ import {quizPassingListFetch, quizPassingListUnload} from "../../../actions/quiz
 import {QuizPassingList} from "./QuizPassingList";
 import {LoadMore} from "../../Common/LoadMore";
 
-const mapeStateToProps = state => ({
+const mapStateToProps = state => ({
     ...state.quizPassingList,
     isAuthenticated: state.auth.isAuthenticated
 });
@@ -30,6 +30,7 @@ class QuizPassingListContainer extends React.Component {
 
     render() {
         const {isFetching, quizPassingList, currentPage, pageCount} = this.props;
+
         const showLoadMore = pageCount > 1 && currentPage <= pageCount;
 
         if (isFetching && currentPage === 1) {
@@ -49,4 +50,4 @@ class QuizPassingListContainer extends React.Component {
     }
 }
 
-export default connect(mapeStateToProps, mapDispatchToProps)(QuizPassingListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(QuizPassingListContainer);

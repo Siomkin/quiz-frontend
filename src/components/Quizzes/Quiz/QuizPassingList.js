@@ -4,6 +4,7 @@ import {TransitionGroup, CSSTransition} from "react-transition-group";
 
 import "../../../assets/css/quizPassingList.css";
 import {Message} from "../../Common/Message";
+import {Link} from "react-router-dom";
 
 export class QuizPassingList extends React.Component {
     render() {
@@ -20,16 +21,25 @@ export class QuizPassingList extends React.Component {
                 <TransitionGroup>
                     {quizPassingList.map(passing => {
                         return (
-                            <CSSTransition key={passing.id} timeout={1000} classNames="fade">
+                            <CSSTransition key={passing.id} timeout={500} classNames="fade">
                                 <div className="card-body border-bottom">
-                                    <p className="card-text mb-0">
-                                        {passing.uuid}
-                                    </p>
-                                    <p className="card-text">
+                                    <div className="container">
+                                        <div className="row">
+                                            <div className="col-sm">
+                                                {passing.uuid}
+                                            </div>
+                                            <div className="col-sm text-right">
+                                                <Link to={`/passing/${passing.uuid}`}>
+                                                    Go to quiz
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="container">
                                         <small className="text-muted">
                                             {timeago().format(passing.started_at)} by&nbsp;
                                         </small>
-                                    </p>
+                                    </div>
                                 </div>
                             </CSSTransition>
                         );

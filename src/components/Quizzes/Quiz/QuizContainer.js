@@ -5,7 +5,7 @@ import {Spinner} from "../../Common/Spinner";
 import {quizFetch, quizUnload} from "../../../actions/quizActions";
 import QuizPassingListContainer from "./QuizPassingListContainer";
 
-const mapeStateToProps = state => ({
+const mapStateToProps = state => ({
     ...state.quiz,
     isAuthenticated: state.auth.isAuthenticated
 });
@@ -15,7 +15,7 @@ const mapDispatchToProps = {
     quizUnload
 };
 
-class BlogPostContainer extends React.Component {
+class QuizContainer extends React.Component {
     componentDidMount() {
         this.props.quizFetch(this.props.match.params.id);
     }
@@ -26,6 +26,7 @@ class BlogPostContainer extends React.Component {
 
     render() {
         const {isAuthenticated, isFetching, quiz} = this.props;
+
 
         if (isFetching) {
             return (<Spinner/>);
@@ -40,4 +41,4 @@ class BlogPostContainer extends React.Component {
     }
 }
 
-export default connect(mapeStateToProps, mapDispatchToProps)(BlogPostContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(QuizContainer);

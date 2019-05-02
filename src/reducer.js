@@ -5,11 +5,15 @@ import auth from "./redusers/auth";
 import quizList from "./redusers/quizList";
 import quiz from "./redusers/quiz";
 import quizPassingList from "./redusers/quizPassingList";
+import passingStart from "./redusers/passingStart";
+import quizProcess from "./redusers/quizProcess";
 
 export default (history) => combineReducers({
     auth,
     quizList,
     quizPassingList,
+    passingStart,
+    quizProcess,
     quiz,
     router: connectRouter(history),
     form: formReducer
