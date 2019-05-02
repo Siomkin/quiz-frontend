@@ -1,7 +1,7 @@
 import React from 'react';
 import timeago from 'timeago.js';
 import {Message} from "../../Common/Message";
-import {Link} from "react-router-dom";
+import QuizStart from "./QuizStart";
 
 
 export class Quiz extends React.Component {
@@ -27,11 +27,7 @@ export class Quiz extends React.Component {
                 {
                     isAuthenticated &&
                     (
-                        <div className="nav-item text-center pb-4">
-                            <Link to={`/beginQuiz/${quiz.id}`} className="btn btn-info">
-                                Start new
-                            </Link>
-                        </div>
+                        <QuizStart quizId={quiz.id}/>
                     )
                 }
             </div>

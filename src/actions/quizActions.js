@@ -34,7 +34,7 @@ export const quizListSetPage = (page) => ({
 export const quizListFetch = (page = 1) => {
     return (dispatch) => {
         dispatch(quizListRequest());
-        return requests.get(`/quizzes?_page=${page}`, true)
+        return requests.get(`/quizzes?_page=${page}`)
             .then(response => dispatch(quizListReceived(response)))
             .catch(error => dispatch(quizListError(error)));
     }
@@ -59,7 +59,7 @@ export const quizReceived = (data) => ({
 export const quizFetch = (id) => {
     return (dispatch) => {
         dispatch(quizRequest());
-        return requests.get(`/quizzes/${id}`, true)
+        return requests.get(`/quizzes/${id}`)
             .then(response => dispatch(quizReceived(response)))
             .catch(error => dispatch(quizError(error)));
     }

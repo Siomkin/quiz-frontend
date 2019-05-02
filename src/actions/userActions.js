@@ -82,7 +82,7 @@ export const userRegister = (email, name, password, retypedPassword) => {
         return requests.post('/users', {email, name, password, retypedPassword}, false)
             .then(() => dispatch(userRegisterSuccess()))
             .catch(error => {
-                // throw new SubmissionError(parseApiErrors(error));
+                throw new SubmissionError(error);
             });
     }
 };
