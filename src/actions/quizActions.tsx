@@ -10,29 +10,30 @@ import {
     QUIZ_UNLOAD,
     QUIZ_ERROR
 } from "./constants";
+import {Dispatch} from "redux";
 
 
 export const quizListRequest = () => ({
     type: QUIZ_LIST_REQUEST,
 });
 
-export const quizListError = (error) => ({
+export const quizListError = (error: object) => ({
     type: QUIZ_LIST_ERROR,
     error
 });
 
-export const quizListReceived = (data) => ({
+export const quizListReceived = (data: object) => ({
     type: QUIZ_LIST_RECEIVED,
     data
 });
 
-export const quizListSetPage = (page) => ({
+export const quizListSetPage = (page: number) => ({
     type: QUIZ_LIST_SET_PAGE,
     page
 });
 
-export const quizListFetch = (page = 1) => {
-    return (dispatch) => {
+export const quizListFetch = (page: number = 1) => {
+    return (dispatch: Dispatch) => {
         dispatch(quizListRequest());
         return requests.get(`/quizzes?_page=${page}`)
             .then(response => dispatch(quizListReceived(response)))
@@ -45,19 +46,19 @@ export const quizRequest = () => ({
     type: QUIZ_REQUEST,
 });
 
-export const quizError = (error) => ({
+export const quizError = (error: object) => ({
     type: QUIZ_ERROR,
     error
 });
 
-export const quizReceived = (data) => ({
+export const quizReceived = (data: object) => ({
     type: QUIZ_RECEIVED,
     data
 });
 
 
-export const quizFetch = (id) => {
-    return (dispatch) => {
+export const quizFetch = (id: number) => {
+    return (dispatch: Dispatch) => {
         dispatch(quizRequest());
         return requests.get(`/quizzes/${id}`)
             .then(response => dispatch(quizReceived(response)))

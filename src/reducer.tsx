@@ -8,7 +8,7 @@ import quizPassingList from "./redusers/quizPassingList";
 import passingStart from "./redusers/passingStart";
 import quizProcess from "./redusers/quizProcess";
 
-export default (history) => combineReducers({
+export default (history: any) => combineReducers({
     auth,
     quizList,
     quizPassingList,
