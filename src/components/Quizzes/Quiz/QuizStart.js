@@ -1,16 +1,16 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {quizPassingStart,quizPassingStartUnload} from "../../../actions/passingActions";
+import {quizPassingStartUnload} from "../../../actions/passingActions";
 import {Spinner} from "../../Common/Spinner";
-import {Link} from "react-router-dom";
 import {history} from '../../../configureStore'
+import QuizNavItem from "./QuizNavItem";
 
 const mapStateToProps = state => ({
     ...state.passingStart
 
 });
 const mapDispatchToProps = {
-    quizPassingStart,quizPassingStartUnload
+    quizPassingStartUnload
 };
 
 export class QuizStart extends React.Component {
@@ -27,36 +27,18 @@ export class QuizStart extends React.Component {
         this.props.quizPassingStartUnload();
     }
 
-    onStatNewPassingClick() {
-        const {quizId, quizPassingStart} = this.props;
-        quizPassingStart(quizId);
-    }
-
     render() {
-        const {passing, isFetching} = this.props;
+        const {quizId, isFetching} = this.props;
+
+        console.log(this.props);
 
         if (isFetching) {
-            return (<Spinner/>);
-        }
-        if (null !== passing) {
-            return (
-                <div className="nav-item text-center pb-4">
-                    <Link to={`/passing/${passing.uuid}`} className="btn btn-info">
-                        Go to quiz
-                    </Link>
-                </div>
-            );
+            return (<Spinner> Starting ... </Spinner>);
         }
 
         return (
-
-            <div className="nav-item text-center pb-4">
-                <div onClick={this.onStatNewPassingClick.bind(this)} className="btn btn-info">
-                    Start
-                </div>
-            </div>
-
-        )
+            <QuizNavItem quizId={quizId}/>
+        );
     }
 }
 

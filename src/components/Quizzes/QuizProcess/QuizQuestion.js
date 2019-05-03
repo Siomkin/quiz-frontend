@@ -3,12 +3,10 @@ import {connect} from "react-redux";
 import {Spinner} from "../../Common/Spinner";
 import {
     quizProcessQuestion,
-    quizProcessQuestionCheckAnswer,
     quizProcessQuestionSetSelect
 } from "../../../actions/quizProcessQuestionActions";
-import RightAnswered from "./RightAnswered";
-import WrongAnswered from "./WrongAnswered";
 import classNames from "classnames";
+import QuizQuestionCheck from "./QuizQuestionCheck";
 
 
 const mapStateToProps = state => ({
@@ -16,7 +14,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    quizProcessQuestion, quizProcessQuestionSetSelect, quizProcessQuestionCheckAnswer
+    quizProcessQuestion, quizProcessQuestionSetSelect
 };
 
 class QuizQuestion extends React.Component {
@@ -32,44 +30,11 @@ class QuizQuestion extends React.Component {
         }
     }
 
-    checkAnswer() {
-        const {quizProcessQuestionCheckAnswer, uuid, question, selected} = this.props;
-        quizProcessQuestionCheckAnswer(uuid, question.id, selected);
-    }
-
-
-    getButton() {
-        const {isRight, selected, isAnswered, isChecking} = this.props;
-
-        if (isAnswered) {
-            if (isRight) {
-                return (<RightAnswered uuid={this.props.uuid}/>);
-            } else {
-                return (<WrongAnswered/>);
-            }
-        } else {
-
-            if (isChecking) {
-                return (<Spinner/>);
-            }
-
-            return (
-                <div className={'text-center'}>
-                    <button type="submit" className="btn btn-primary btn-big btn-block"
-                            onClick={() => this.checkAnswer()}
-                            disabled={!selected}>
-                        Check answer
-                    </button>
-                </div>
-            )
-        }
-    }
-
     render() {
-        const {isFetching, selected, answers, question} = this.props;
+        const {uuid, isFetching, selected, answers, question} = this.props;
 
         if (question === null || isFetching) {
-            return (<Spinner/>);
+            return (<Spinner> Fetching ... </Spinner>);
         }
         if (question) {
             return (
@@ -94,7 +59,7 @@ class QuizQuestion extends React.Component {
                         </ul>
                     </div>
                     <div className={'pt-4'}>
-                        {this.getButton()}
+                        <QuizQuestionCheck uuid={uuid}/>
                     </div>
                 </div>
             )
