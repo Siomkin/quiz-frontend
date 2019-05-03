@@ -1,4 +1,6 @@
 import {requests} from "../utils/agent";
+import {Dispatch} from "redux";
+
 import {
     USER_LOGIN_SUCCESS,
     USER_LOGOUT,
@@ -13,7 +15,7 @@ import {
 
 import {SubmissionError} from "redux-form";
 
-export const userLoginSuccess = (token, userId) => {
+export const userLoginSuccess = (token: string, userId: number) => {
     return {
         type: USER_LOGIN_SUCCESS,
         token,
@@ -21,8 +23,8 @@ export const userLoginSuccess = (token, userId) => {
     }
 };
 
-export const userLoginAttempt = (username, password) => {
-    return (dispatch) => {
+export const userLoginAttempt = (username: string, password: string) => {
+    return (dispatch: Dispatch) => {
         return requests.post('/login_check', {username, password}, false).then(
             response => dispatch(userLoginSuccess(response.token, response.id))
         ).catch(() => {
@@ -45,8 +47,8 @@ export const userConfirmationSuccess = () => {
     }
 };
 
-export const userConfirm = (confirmationToken) => {
-    return (dispatch) => {
+export const userConfirm = (confirmationToken: string) => {
+    return (dispatch: Dispatch) => {
         return requests.post('/users/confirm', {confirmationToken}, false)
             .then(() => dispatch(userConfirmationSuccess()))
             .catch(error => {
@@ -58,7 +60,7 @@ export const userConfirm = (confirmationToken) => {
 };
 
 
-export const userSetId = (userId) => {
+export const userSetId = (userId: number) => {
     return {
         type: USER_SET_ID,
         userId
@@ -77,8 +79,8 @@ export const userRegisterSuccess = () => {
     }
 };
 
-export const userRegister = (email, name, password, retypedPassword) => {
-    return (dispatch) => {
+export const userRegister = (email: string, name: string, password: string, retypedPassword: string) => {
+    return (dispatch: Dispatch) => {
         return requests.post('/users', {email, name, password, retypedPassword}, false)
             .then(() => dispatch(userRegisterSuccess()))
             .catch(error => {
@@ -94,14 +96,14 @@ export const userProfileRequest = () => {
     }
 };
 
-export const userProfileError = (userId) => {
+export const userProfileError = (userId: number) => {
     return {
         type: USER_PROFILE_ERROR,
         userId
     }
 };
 
-export const userProfileReceived = (userId, userData) => {
+export const userProfileReceived = (userId: number, userData: object) => {
     return {
         type: USER_PROFILE_RECEIVED,
         userData,
@@ -109,8 +111,8 @@ export const userProfileReceived = (userId, userData) => {
     }
 };
 
-export const userProfileFetch = (userId) => {
-    return (dispatch) => {
+export const userProfileFetch = (userId: number) => {
+    return (dispatch: Dispatch) => {
         dispatch(userProfileRequest());
         return requests.get(`/users/${userId}`, true).then(
             response => dispatch(userProfileReceived(userId, response))

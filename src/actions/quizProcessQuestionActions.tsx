@@ -1,4 +1,5 @@
 import {requests} from "../utils/agent";
+import {Dispatch} from "redux";
 
 import {
     QUIZ_PROCESS_QUESTION_REQUEST,
@@ -17,18 +18,18 @@ export const quizProcessQuestionRequest = () => ({
     type: QUIZ_PROCESS_QUESTION_REQUEST,
 });
 
-export const quizProcessQuestionError = (error) => ({
+export const quizProcessQuestionError = (error: object) => ({
     type: QUIZ_PROCESS_QUESTION_ERROR,
     error
 });
 
-export const quizProcessQuestionReceived = (data) => ({
+export const quizProcessQuestionReceived = (data: object) => ({
     type: QUIZ_PROCESS_QUESTION_RECEIVED,
     data
 });
 
-export const quizProcessQuestion = (uuid) => {
-    return (dispatch) => {
+export const quizProcessQuestion = (uuid: string) => {
+    return (dispatch: Dispatch) => {
         dispatch(quizProcessQuestionRequest());
         return requests.get(`/quiz/${uuid}/question`, true)
             .then(
@@ -38,7 +39,7 @@ export const quizProcessQuestion = (uuid) => {
     }
 };
 
-export const quizProcessQuestionSetSelect = (answer) => ({
+export const quizProcessQuestionSetSelect = (answer: number) => ({
     type: QUIZ_PROCESS_QUESTION_SET_SELECTED,
     answer
 });
@@ -46,8 +47,8 @@ export const quizProcessQuestionSetNext = () => ({
     type: QUIZ_PROCESS_QUESTION_SET_NEXT
 });
 
-export const quizProcessQuestionNext = (uuid) => {
-    return (dispatch) => {
+export const quizProcessQuestionNext = (uuid: string) => {
+    return (dispatch: Dispatch) => {
         dispatch(quizProcessQuestionSetNext());
         dispatch(quizProcessQuestionRequest());
         return requests.get(`/quiz/${uuid}/question`, true)
@@ -67,18 +68,18 @@ export const quizProcessQuestionCheckAnswerAgain = () => ({
     type: QUIZ_PROCESS_QUESTION_CHECK_ANSWER_AGAIN,
 });
 
-export const quizProcessQuestionCheckAnswerError = (error) => ({
+export const quizProcessQuestionCheckAnswerError = (error: object) => ({
     type: QUIZ_PROCESS_QUESTION_CHECK_ANSWER_ERROR,
     error
 });
 
-export const quizProcessQuestionCheckAnswerReceived = (data) => ({
+export const quizProcessQuestionCheckAnswerReceived = (data: object) => ({
     type: QUIZ_PROCESS_QUESTION_CHECK_ANSWER_RECEIVED,
     data
 });
 
-export const quizProcessQuestionCheckAnswer = (uuid, question_id, selected) => {
-    return (dispatch) => {
+export const quizProcessQuestionCheckAnswer = (uuid: string, question_id: number, selected: number) => {
+    return (dispatch: Dispatch) => {
         dispatch(quizProcessQuestionCheckAnswerRequest());
         return requests.post(`/quiz/${uuid}/question`, {'id': question_id, selected}, true)
             .then(
