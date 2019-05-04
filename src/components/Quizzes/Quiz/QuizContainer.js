@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {Quiz} from "./Quiz";
 import {Spinner} from "../../Common/Spinner";
-import {quizFetch, quizUnload} from "../../../actions/quizActions";
+import {quizFetch, quizUnload} from "../../../store/quiz/quizActions";
 import QuizPassingListContainer from "./QuizPassingListContainer";
 
 const mapStateToProps = state => ({

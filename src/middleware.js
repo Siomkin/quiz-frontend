@@ -1,20 +1,20 @@
-import {USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_ERROR} from "./actions/constants";
+import {UserActionTypes} from "./store/user/userTypes";
 import {requests} from "./utils/agent";
-import {userLogout} from "./actions/userActions";
+import {userLogout} from "./store/user/userActions";
 
 export const tokenMiddleware = store => next => action => {
     switch (action.type) {
-        case USER_LOGIN_SUCCESS:
+        case UserActionTypes.LOGIN_SUCCESS:
             window.localStorage.setItem('jwtToken', action.token);
             window.localStorage.setItem('userId', action.userId);
             requests.setToken(action.token);
             break;
-        case USER_LOGOUT:
+        case UserActionTypes.LOGOUT:
             window.localStorage.removeItem('jwtToken');
             window.localStorage.removeItem('userId');
             requests.setToken(null);
             break;
-        case USER_PROFILE_ERROR:
+        case UserActionTypes.PROFILE_ERROR:
             const state = store.getState().auth;
             if (state.userId === action.userId && state.userData === null) {
                 store.dispatch(userLogout());

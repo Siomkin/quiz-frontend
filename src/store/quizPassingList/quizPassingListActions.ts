@@ -1,26 +1,19 @@
-import {requests} from "../utils/agent";
+import {requests} from "../../utils/agent";
 import {Dispatch} from "redux";
-
-import {
-    QUIZ_PASSING_LIST_ERROR,
-    QUIZ_PASSING_LIST_RECEIVED,
-    QUIZ_PASSING_LIST_REQUEST,
-    QUIZ_PASSING_LIST_UNLOAD,
-
-} from "./constants";
+import {QuizPassingListActionTypes} from "./quizPassingListTypes";
 
 
 export const quizPassingListRequest = () => ({
-    type: QUIZ_PASSING_LIST_REQUEST,
+    type: QuizPassingListActionTypes.FETCH_REQUEST,
 });
 
 export const quizPassingListError = (error: object) => ({
-    type: QUIZ_PASSING_LIST_ERROR,
+    type: QuizPassingListActionTypes.FETCH_ERROR,
     error
 });
 
 export const quizPassingListReceived = (data: object) => ({
-    type: QUIZ_PASSING_LIST_RECEIVED,
+    type: QuizPassingListActionTypes.FETCH_RECEIVED,
     data
 });
 
@@ -33,5 +26,5 @@ export const quizPassingListFetch = (quiz: number, page = 1) => {
     }
 };
 export const quizPassingListUnload = () => ({
-    type: QUIZ_PASSING_LIST_UNLOAD,
+    type: QuizPassingListActionTypes.UNLOAD,
 });

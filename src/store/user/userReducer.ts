@@ -1,32 +1,37 @@
-import {USER_LOGIN_SUCCESS, USER_LOGOUT, USER_PROFILE_RECEIVED, USER_SET_ID} from "../actions/constants";
+import {Reducer} from "redux";
+import {UserTypes,UserActionTypes} from "./userTypes";
 
-export default (state = {
+
+export const initialState: UserTypes = {
     token: null,
     userId: null,
     isAuthenticated: false,
     userData: null
-}, action) => {
+};
+
+const reducer: Reducer<UserTypes> = (state = initialState, action) => {
+
     switch (action.type) {
-        case USER_LOGIN_SUCCESS:
+        case UserActionTypes.LOGIN_SUCCESS:
             return {
                 ...state,
                 token: action.token,
                 userId: action.userId,
                 isAuthenticated: true
             };
-        case USER_SET_ID:
+        case UserActionTypes.SET_ID:
             return {
                 ...state,
                 userId: action.userId,
                 isAuthenticated: true
             };
-        case USER_PROFILE_RECEIVED:
+        case UserActionTypes.PROFILE_RECEIVED:
             return {
                 ...state,
                 userData: (state.userId === action.userId && state.userData === null) ? action.userData : state.userData,
                 isAuthenticated: (state.userId === action.userId && state.userData === null)
             };
-        case USER_LOGOUT:
+        case UserActionTypes.LOGOUT:
             return {
                 ...state,
                 token: null,
@@ -37,4 +42,6 @@ export default (state = {
         default:
             return state;
     }
-}
+};
+
+export {reducer as UserReducer}

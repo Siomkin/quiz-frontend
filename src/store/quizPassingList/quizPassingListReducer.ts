@@ -1,24 +1,22 @@
-import {
-    QUIZ_PASSING_LIST_REQUEST,
-    QUIZ_PASSING_LIST_RECEIVED,
-    QUIZ_PASSING_LIST_ERROR,
-    QUIZ_PASSING_LIST_UNLOAD
-} from "../actions/constants";
+import {Reducer} from "redux";
+import {QuizPassingListActionTypes, QuizPassingListTypes} from "./quizPassingListTypes";
 
-export default (state = {
+export const initialState: QuizPassingListTypes = {
     quizPassingList: null,
     isFetching: false,
     currentPage: 1,
     pageCount: null
-}, action) => {
+};
+
+const reducer: Reducer<QuizPassingListTypes> = (state = initialState, action) => {
     switch (action.type) {
-        case QUIZ_PASSING_LIST_REQUEST:
+        case QuizPassingListActionTypes.FETCH_REQUEST:
             state = {
                 ...state,
                 isFetching: true,
             };
             return state;
-        case QUIZ_PASSING_LIST_RECEIVED:
+        case QuizPassingListActionTypes.FETCH_RECEIVED:
             state = {
                 ...state,
                 quizPassingList: !state.quizPassingList ?
@@ -28,16 +26,12 @@ export default (state = {
                 currentPage: state.currentPage + 1
             };
             return state;
-        case QUIZ_PASSING_LIST_ERROR:
-        case QUIZ_PASSING_LIST_UNLOAD:
-            return {
-                ...state,
-                isFetching: false,
-                quizPassingList: null,
-                currentPage: 1,
-                pageCount: null
-            };
+        case QuizPassingListActionTypes.FETCH_ERROR:
+        case QuizPassingListActionTypes.UNLOAD:
+            return initialState;
         default:
             return state;
     }
-}
+};
+
+export {reducer as QuizPassingListReducer}

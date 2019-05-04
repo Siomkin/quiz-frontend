@@ -6,7 +6,7 @@ import {Route, Switch} from "react-router";
 import {requests} from "../utils/agent";
 
 import Header from "./Header";
-import {userLogout, userProfileFetch, userSetId} from "../actions/userActions";
+import {userLogout, userProfileFetch, userSetId} from "../store/user/userActions";
 import LoginForm from "./User/LoginForm";
 import RegistrationContainer from "./User/Registration/RegistrationContainer";
 import QuizzesContainer from "./Quizzes/QuizList/QuizzesContainer";

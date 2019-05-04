@@ -2,7 +2,7 @@ import React from "react";
 import {Field, reduxForm} from "redux-form";
 
 import {connect} from "react-redux";
-import {userRegister} from "../../../actions/userActions";
+import {userRegister} from "../../../store/user/userActions";
 import {renderField} from "../../../utils/form";
 
 const mapDispatchToProps = {

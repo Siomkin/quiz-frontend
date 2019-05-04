@@ -1,12 +1,12 @@
-import superagent from 'superagent';
+import superagent, {Request} from 'superagent';
 
 const API_ROOT = 'http://localhost:8080/api';
 const responseBody = (response: any) => response.body;
 
 let token: string | null = null;
 
-const tokenPlugin = (secured: any) => {
-    return (request: any) => {
+const tokenPlugin = (secured: boolean) => {
+    return (request: Request) => {
         if (token && secured) {
             request.set('Authorization', `Bearer ${token}`);
         }
@@ -20,7 +20,7 @@ export const requests = {
     post: (url: string, body?: string | object, secured = true) => {
         return superagent.post(`${API_ROOT}${url}`).send(body).use(tokenPlugin(secured)).then(responseBody);
     },
-    put: (url: string, body?: string | object, secured:boolean = true) => {
+    put: (url: string, body?: string | object, secured: boolean = true) => {
         return superagent.put(`${API_ROOT}${url}`).send(body).use(tokenPlugin(secured)).then(responseBody);
     },
     patch: (url: string, body?: string | object, secured = true) => {

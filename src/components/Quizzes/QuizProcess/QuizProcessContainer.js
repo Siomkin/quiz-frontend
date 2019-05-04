@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 
 import {Spinner} from "../../Common/Spinner";
-import {quizProcess} from "../../../actions/quizProcessActions";
+import {quizProcess} from "../../../store/quizProcess/quizProcessActions";
 import QuizQuestion from "./QuizQuestion";
 import timeago from "timeago.js";
 import QuizComplete from "./QuizComplete";

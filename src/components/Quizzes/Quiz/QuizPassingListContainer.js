@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {Spinner} from "../../Common/Spinner";
-import {quizPassingListFetch, quizPassingListUnload} from "../../../actions/quizMemberActions";
+import {quizPassingListFetch, quizPassingListUnload} from "../../../store/quizPassingList/quizPassingListActions";
 import {QuizPassingList} from "./QuizPassingList";
 import {LoadMore} from "../../Common/LoadMore";
 
