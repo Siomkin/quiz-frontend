@@ -1,23 +1,13 @@
-import {requests} from "../utils/agent";
+import {requests} from "../../utils/agent";
 import {Dispatch} from "redux";
 
-import {
-    USER_LOGIN_SUCCESS,
-    USER_LOGOUT,
-    USER_REGISTER_COMPLETE,
-    USER_REGISTER_SUCCESS,
-    USER_CONFIRMATION_SUCCESS,
-    USER_SET_ID,
-    USER_PROFILE_ERROR,
-    USER_PROFILE_RECEIVED,
-    USER_PROFILE_REQUEST,
-} from "./constants";
 
 import {SubmissionError} from "redux-form";
+import {UserActionTypes} from "./userTypes";
 
 export const userLoginSuccess = (token: string, userId: number) => {
     return {
-        type: USER_LOGIN_SUCCESS,
+        type: UserActionTypes.LOGIN_SUCCESS,
         token,
         userId
     }
@@ -37,13 +27,13 @@ export const userLoginAttempt = (username: string, password: string) => {
 
 export const userRegisterComplete = () => {
     return {
-        type: USER_REGISTER_COMPLETE
+        type: UserActionTypes.REGISTER_COMPLETE
     }
 };
 
 export const userConfirmationSuccess = () => {
     return {
-        type: USER_CONFIRMATION_SUCCESS
+        type: UserActionTypes.CONFIRMATION_SUCCESS
     }
 };
 
@@ -59,23 +49,22 @@ export const userConfirm = (confirmationToken: string) => {
     }
 };
 
-
 export const userSetId = (userId: number) => {
     return {
-        type: USER_SET_ID,
+        type: UserActionTypes.SET_ID,
         userId
     }
 };
 
 export const userLogout = () => {
     return {
-        type: USER_LOGOUT
+        type: UserActionTypes.LOGOUT
     }
 };
 
 export const userRegisterSuccess = () => {
     return {
-        type: USER_REGISTER_SUCCESS
+        type: UserActionTypes.REGISTER_SUCCESS
     }
 };
 
@@ -92,20 +81,20 @@ export const userRegister = (email: string, name: string, password: string, rety
 
 export const userProfileRequest = () => {
     return {
-        type: USER_PROFILE_REQUEST
+        type: UserActionTypes.PROFILE_REQUEST
     }
 };
 
 export const userProfileError = (userId: number) => {
     return {
-        type: USER_PROFILE_ERROR,
+        type: UserActionTypes.PROFILE_ERROR,
         userId
     }
 };
 
 export const userProfileReceived = (userId: number, userData: object) => {
     return {
-        type: USER_PROFILE_RECEIVED,
+        type: UserActionTypes.PROFILE_RECEIVED,
         userData,
         userId
     }

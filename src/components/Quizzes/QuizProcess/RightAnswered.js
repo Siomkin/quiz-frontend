@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import {
     quizProcessQuestionNext
-} from "../../../actions/quizProcessQuestionActions";
+} from "../../../store/quizProcess/quizProcessQuestionActions";
 
 
 const mapDispatchToProps = {

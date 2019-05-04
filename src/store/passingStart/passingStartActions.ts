@@ -1,28 +1,26 @@
-import {requests} from "../utils/agent";
+import {requests} from "../../utils/agent";
 
-import {
-    QUIZ_PASSING_START_REQUEST,
-    QUIZ_PASSING_START_ERROR,
-    QUIZ_PASSING_START_RECEIVED,
-    QUIZ_PASSING_START_UNLOAD
-} from "./constants";
 import {Dispatch} from "redux";
+import {PassingStartActionTypes} from "./passingStartTypes";
 
 
 export const quizPassingStartRequest = () => ({
-    type: QUIZ_PASSING_START_REQUEST,
+    type: PassingStartActionTypes.FETCH_REQUEST,
 });
 
+
 export const quizPassingStartError = (error: string) => ({
-    type: QUIZ_PASSING_START_ERROR,
+    type: PassingStartActionTypes.FETCH_ERROR,
     error
 });
 
+
 export const quizPassingStartReceived = (data: object) =>
     ({
-        type: QUIZ_PASSING_START_RECEIVED,
+        type: PassingStartActionTypes.FETCH_RECEIVED,
         data
     });
+
 
 export const quizPassingStart = (id: number) => {
     return (dispatch: Dispatch) => {
@@ -34,8 +32,10 @@ export const quizPassingStart = (id: number) => {
             .catch(error => dispatch(quizPassingStartError(error)));
     }
 };
+
+
 export const quizPassingStartUnload = () => ({
-    type: QUIZ_PASSING_START_UNLOAD,
+    type: PassingStartActionTypes.UNLOAD,
 });
 
 

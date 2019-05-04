@@ -4,7 +4,7 @@ import {Spinner} from "../../Common/Spinner";
 import {
     quizProcessQuestion,
     quizProcessQuestionSetSelect
-} from "../../../actions/quizProcessQuestionActions";
+} from "../../../store/quizProcess/quizProcessQuestionActions";
 import classNames from "classnames";
 import QuizQuestionCheck from "./QuizQuestionCheck";
 

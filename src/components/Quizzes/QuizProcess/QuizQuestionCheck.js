@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Spinner} from "../../Common/Spinner";
 import {
     quizProcessQuestionCheckAnswer
-} from "../../../actions/quizProcessQuestionActions";
+} from "../../../store/quizProcess/quizProcessQuestionCheckActions";
 import RightAnswered from "./RightAnswered";
 import WrongAnswered from "./WrongAnswered";
 

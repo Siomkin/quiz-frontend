@@ -1,23 +1,22 @@
-import {requests} from "../utils/agent";
+import {requests} from "../../utils/agent";
 import {Dispatch} from "redux";
+import {QuizProcessActionTypes} from "./quizProcessTypes";
 
-import {
-    QUIZ_PROCESS_REQUEST, QUIZ_PROCESS_ERROR, QUIZ_PROCESS_RECEIVED
-} from "./constants";
+
 
 
 export const quizProcessRequest = () => ({
-    type: QUIZ_PROCESS_REQUEST,
+    type: QuizProcessActionTypes.FETCH_REQUEST,
 });
 
 export const quizProcessError = (error: object) => ({
-    type: QUIZ_PROCESS_ERROR,
+    type: QuizProcessActionTypes.FETCH_ERROR,
     error
 });
 
 export const quizProcessReceived = (data: object) =>
     ({
-        type: QUIZ_PROCESS_RECEIVED,
+        type: QuizProcessActionTypes.FETCH_RECEIVED,
         data
     });
 

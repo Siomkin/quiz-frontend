@@ -2,7 +2,7 @@ import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {renderField} from "../../utils/form";
 import {connect} from "react-redux";
-import {userConfirm} from "../../actions/userActions";
+import {userConfirm} from "../../store/user/userActions";
 
 const mapDispatchToProps = {
   userConfirm

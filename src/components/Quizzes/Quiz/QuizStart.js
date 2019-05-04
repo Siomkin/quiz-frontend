@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {quizPassingStartUnload} from "../../../actions/passingActions";
+import {quizPassingStartUnload} from "../../../store/passingStart/passingStartActions";
 import {Spinner} from "../../Common/Spinner";
 import {history} from '../../../configureStore'
 import QuizNavItem from "./QuizNavItem";

@@ -2,7 +2,7 @@ import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 import {renderField} from "../../utils/form";
 import {connect} from 'react-redux';
-import {userLoginAttempt} from "../../actions/userActions";
+import {userLoginAttempt} from "../../store/user/userActions";
 
 const mapStateToProps = state => ({
     ...state.auth

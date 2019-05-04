@@ -1,20 +1,13 @@
+import {Reducer} from "redux";
 import {
-    QUIZ_PROCESS_REQUEST,
-    QUIZ_PROCESS_RECEIVED,
-    QUIZ_PROCESS_ERROR,
-    QUIZ_PROCESS_SET_CURRENT,
-    QUIZ_PROCESS_QUESTION_SET_NEXT,
-    QUIZ_PROCESS_QUESTION_REQUEST,
-    QUIZ_PROCESS_QUESTION_RECEIVED,
-    QUIZ_PROCESS_QUESTION_ERROR,
-    QUIZ_PROCESS_QUESTION_SET_SELECTED,
-    QUIZ_PROCESS_QUESTION_CHECK_ANSWER,
-    QUIZ_PROCESS_QUESTION_CHECK_ANSWER_RECEIVED,
-    QUIZ_PROCESS_QUESTION_CHECK_ANSWER_ERROR,
-    QUIZ_PROCESS_QUESTION_CHECK_ANSWER_AGAIN
-} from "../actions/constants";
+    QuizProcessTypes,
+    QuizProcessActionTypes,
+    QuizProcessQuestionCheckActionTypes,
+    QuizProcessQuestionActionTypes
+} from "./quizProcessTypes";
 
-export default (state = {
+
+export const initialState: QuizProcessTypes = {
     quiz: null,
     member: null,
     isFetching: false,
@@ -30,16 +23,18 @@ export default (state = {
     selected: null,
 
     top: null,
+};
 
-}, action) => {
+const reducer: Reducer<QuizProcessTypes> = (state = initialState, action) => {
+
     switch (action.type) {
-        case QUIZ_PROCESS_REQUEST:
+        case QuizProcessActionTypes.FETCH_REQUEST:
             state = {
                 ...state,
                 isFetching: true,
             };
             return state;
-        case QUIZ_PROCESS_RECEIVED:
+        case QuizProcessActionTypes.FETCH_RECEIVED:
             state = {
                 ...state,
                 quiz: action.data['quiz'],
@@ -49,26 +44,22 @@ export default (state = {
                 isFetching: false
             };
             return state;
-        case QUIZ_PROCESS_ERROR:
-            return {
-                ...state,
-                isFetching: false,
-                quiz: null,
-                member: null
-            };
+        case QuizProcessActionTypes.FETCH_ERROR:
+        case QuizProcessActionTypes.UNLOAD:
+            return initialState;
 
-        case QUIZ_PROCESS_SET_CURRENT:
+        case QuizProcessActionTypes.SET_CURRENT:
             return {
                 ...state,
                 currentQuestion: action.page
             };
-        case QUIZ_PROCESS_QUESTION_REQUEST:
+        case QuizProcessQuestionActionTypes.FETCH_REQUEST:
             state = {
                 ...state,
                 isFetchingQuestion: true,
             };
             return state;
-        case QUIZ_PROCESS_QUESTION_RECEIVED:
+        case QuizProcessQuestionActionTypes.FETCH_RECEIVED:
             state = {
                 ...state,
                 member: action.data['member'] ? action.data['member'] : state['member'],
@@ -78,7 +69,8 @@ export default (state = {
                 isFetchingQuestion: false
             };
             return state;
-        case QUIZ_PROCESS_QUESTION_ERROR:
+        case QuizProcessQuestionActionTypes.FETCH_ERROR:
+        case QuizProcessQuestionActionTypes.UNLOAD:
             return {
                 ...state,
                 isFetchingQuestion: false,
@@ -87,12 +79,12 @@ export default (state = {
                 answers: null,
                 question: null,
             };
-        case QUIZ_PROCESS_QUESTION_SET_SELECTED:
+        case QuizProcessQuestionActionTypes.SET_SELECTED:
             return {
                 ...state,
                 selected: action.answer
             };
-        case QUIZ_PROCESS_QUESTION_SET_NEXT:
+        case QuizProcessQuestionActionTypes.SET_NEXT:
             return {
                 ...state,
                 isFetchingQuestion: false,
@@ -103,13 +95,13 @@ export default (state = {
                 isRight: false,
                 selected: null
             };
-        case QUIZ_PROCESS_QUESTION_CHECK_ANSWER:
+        case QuizProcessQuestionCheckActionTypes.FETCH_REQUEST:
             state = {
                 ...state,
                 isChecking: true,
             };
             return state;
-        case QUIZ_PROCESS_QUESTION_CHECK_ANSWER_RECEIVED:
+        case QuizProcessQuestionCheckActionTypes.FETCH_RECEIVED:
             state = {
                 ...state,
                 isRight: action.data['right'],
@@ -118,14 +110,15 @@ export default (state = {
                 isChecking: false
             };
             return state;
-        case QUIZ_PROCESS_QUESTION_CHECK_ANSWER_ERROR:
+        case QuizProcessQuestionCheckActionTypes.FETCH_ERROR:
+        case QuizProcessQuestionCheckActionTypes.UNLOAD:
             return {
                 ...state,
                 isChecking: false,
                 isRight: false,
                 isAnswered: false
             };
-        case QUIZ_PROCESS_QUESTION_CHECK_ANSWER_AGAIN:
+        case QuizProcessQuestionCheckActionTypes.AGAIN:
             state = {
                 ...state,
                 isAnswered: false,
@@ -135,4 +128,5 @@ export default (state = {
         default:
             return state;
     }
-}
+};
+export {reducer as QuizProcessReducer}

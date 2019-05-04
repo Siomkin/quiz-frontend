@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import {quizPassingStart} from "../../../actions/passingActions";
+import {quizPassingStart} from "../../../store/passingStart/passingStartActions";
 import {connect} from "react-redux";
 
 const mapStateToProps = state => ({

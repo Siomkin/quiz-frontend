@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {Spinner} from "../../Common/Spinner";
 import {Paginator} from "../../Common/Paginator";
 import QuizzesList from "./QuizzesList";
-import {quizListFetch, quizListSetPage} from "../../../actions/quizActions";
+import {quizListFetch, quizListSetPage} from "../../../store/quizList/quizListActions";
 
 const mapStateToProps = state => ({
     ...state.quizList
